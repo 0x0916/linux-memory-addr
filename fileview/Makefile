@@ -1,5 +1,5 @@
 all:
-	gcc -o fileview fileview.c
+	gcc -o fileview -D_LARGEFILE64_SOURCE fileview.c
 
 clean:
 	$(RM)  fileview
