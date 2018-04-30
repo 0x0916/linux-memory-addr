@@ -35,7 +35,7 @@ static int reg_proc_show(struct seq_file *m, void *v)
 	seq_printf(m, "PAE=0x%08lX\n", (cr4>>5)&1);
 	seq_printf(m, "cr3=0x%08lX, cr0=0x%08lX\n", cr3, cr4);
 	seq_printf(m, "PGD:0x%08lX\n", (unsigned long)mm->pgd);
-	seq_printf(m, "gdtr address = 0x%08lX, limit = 0x%08X\n", gdtr.address, gdtr.limit);
+	seq_printf(m, "gdtr address = 0x%08lX, limit = 0x%04X\n", gdtr.address, gdtr.limit);
 	return 0;
 }
 
