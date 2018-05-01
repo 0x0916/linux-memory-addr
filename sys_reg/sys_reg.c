@@ -31,9 +31,10 @@ static int reg_proc_show(struct seq_file *m, void *v)
 	asm("sgdt %0":"=m"(gdtr));
 	
 	seq_printf(m, "cr4=0x%08lX, ", cr4);
-	seq_printf(m, "PSE=0x%08lX, ", (cr4>>4)&1);
-	seq_printf(m, "PAE=0x%08lX\n", (cr4>>5)&1);
-	seq_printf(m, "cr3=0x%08lX, cr0=0x%08lX\n", cr3, cr4);
+	seq_printf(m, "PSE(Page Size Extension)=0x%lX, ", (cr4>>4)&1);
+	seq_printf(m, "PAE(Physical Address Extension)=0x%lX\n", (cr4>>5)&1);
+	seq_printf(m, "cr3=0x%08lX\n", cr3);
+	seq_printf(m, "cr0=0x%08lX\n", cr0);
 	seq_printf(m, "PGD:0x%08lX\n", (unsigned long)mm->pgd);
 	seq_printf(m, "gdtr address = 0x%08lX, limit = 0x%04X\n", gdtr.address, gdtr.limit);
 	return 0;
