@@ -73,16 +73,26 @@ loff_t dramdev_llseek(struct file *file, loff_t offset, int whence)
 static const struct file_operations dramdev_fops = {
 	.owner =	THIS_MODULE,
 	.read =		dramdev_read,
-//	.open =		dramdev_open,
 	.llseek =	dramdev_llseek,
 };
+
+static inline unsigned long get_total_physpages(void)
+{
+	int nid;
+	unsigned long phys_pages = 0;
+
+	for_each_online_node(nid)
+		phys_pages += node_spanned_pages(nid);
+
+	return phys_pages;
+}
 
 static int __init dram_init(void)
 {
 	int status;
 
 	printk(KERN_ALERT "[Hello] dram \n");
-	dram_size = (unsigned long )get_num_physpages() << PAGE_SHIFT;
+	dram_size = (unsigned long )get_total_physpages() << PAGE_SHIFT;
 	printk(KERN_ALERT "dram major = %d\n", DRAM_MAJOR);
 	printk(KERN_ALERT "ramtop = %08lX(%lu MB)\n", dram_size, dram_size >> 20);
 
