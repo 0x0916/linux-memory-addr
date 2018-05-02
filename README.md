@@ -10,5 +10,5 @@
 我的修改如下：
 
 * 重写[dram](./dram)
-* 重写`sys_reg`
-* 重构简化`mem_map`
+* 重写[sys_reg](./sys_reg)
+* 重构简化[mem_map](mem_map)
